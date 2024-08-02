@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-Hans-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>截图猜圣地</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="app">
+		<div class="game-box" v-if="game">
+			<div class="status-box" v-if="game.status === 'wait'">
+				<div class="df">
+					<p>开始倒计时...</p>
+				</div>
+			</div>
+			<div class="status-box" v-if="game.status === 'playing'">
+				<!-- 进度条 -->
+				<div class="progress-box">
+					<div class="progress" :style="{width: game.progress * 100 + '%'}"></div>
+				</div>
+				<div class="head">
+					<div class="num-box time-box">
+						<b>{{game.leftScound}}</b>
+						妙
+					</div>
+					<h3>截图猜圣地</h3>
+					<div class="num-box score-box">
+						<b>{{game.score}}</b>
+						分
+					</div>
+				</div>
+				<div class="now-round" v-if="game.nowRound">
+					<div class="capture-box">
+						<img :src="game.nowRound.image" alt="capture">
+					</div>
+					<div class="rounds">
+						<div class="round" v-for="round in game.allRounds" :data-right="String(round.isRight)"></div>
+					</div>
+					<div class="names">
+						<div class="name ui-btn" v-for="name,value in game.nowRound.names" :key="name" @click="game.chooseValue(value)" :data-key="value+1">{{name}}</div>
+					</div>
+				</div>
+			</div>
+			<div class="status-box" v-if="game.status === 'end'">
+				<div class="df">
+					<h3>游戏结束</h3>
+					<p>
+						用时 {{game.totalTime}} 秒，
+						获得 {{game.score}} 分
+					</p>
+					<button @click="startGame()" class="ui-btn">再来一局</button>
+				</div>
+			</div>
+		</div>
+		<div class="status-box" v-else>
+			<div class="df">
+				<h1>截图猜圣地</h1>
+				<p>根据动画截图猜作品名</p>
+				<button @click="startGame()" class="ui-btn">开始游戏</button>
+			</div>
+		</div>
+	</div>
+	<script src="vue.2.6.11.min.js"></script>
+	<script src="ani-trace.js"></script>
+</body>
+</html>
