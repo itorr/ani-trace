@@ -1,5 +1,5 @@
 const randNamesLength = 4;
-const defaultScound = 60;
+const defaultScound = 160;
 
 const getUnix = () => +new Date();
 
@@ -37,7 +37,7 @@ class Game {
 		
 		this.timer = setTimeout(() => {
 			this.startGame();
-		}, 3000);
+		}, 1500);
 	}
 	get allRounds(){
 		return this.rounds.slice(0,this.nowRoundIndex);
@@ -128,15 +128,17 @@ class Game {
 		nowRound.used = used;
 
 		if(value === nowRound.answer){ // 答对
-			this.adjestScore(10);
-			this.addScound(1);
+			nowRound.score = 10;
+			nowRound.plusScound = 1;
 			console.log('答对');
 		}
 		else { // 答错
-			this.adjestScore(-5);
-			this.addScound(-1);
+			nowRound.score = -5;
+			nowRound.plusScound = -1;
 			console.log('答错');
 		}
+		this.adjestScore(nowRound.score);
+		this.addScound(nowRound.plusScound);
 
 		this.nextRound();
 	}
