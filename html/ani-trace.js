@@ -147,13 +147,7 @@ class Game {
 const v = new Vue({
 	el: '.app',
 	data: {
-		status: 'wating', // wating, playing, end
 		game: null,
-	},
-	computed:{
-		lastRound(){
-			return this.rounds[this.rounds.length-1];
-		}
 	},
 	methods: {
 		startGame(){
@@ -164,8 +158,6 @@ const v = new Vue({
 
 
 const flxImage = path=>`https://image.anitabi.cn/${path}?plan=h360`;
-
-
 
 let bangumis = [];
 let Bangumis = {};
