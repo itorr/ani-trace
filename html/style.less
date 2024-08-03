@@ -33,7 +33,7 @@ button{
 	.round{
 		position: absolute;
 		width:100%;
-		transition: top 0.5s ease;
+		transition: top 0.5s ease, opacity 0.5s ease;
 
 		// 从下面画面缩小入画
 		animation: roundIn 0.5s ease;
@@ -48,6 +48,7 @@ button{
 		b{
 			opacity: 0.3;
 		}
+
 	}
 }
 
@@ -58,7 +59,6 @@ button{
 	}
 	to{
 		transform: scale(1) translateY(0);
-		opacity: 1;
 	}
 }
 
@@ -108,8 +108,10 @@ h1,h2,h3,h4,h5,h6{
 	}
 }
 [data-key]{
-	&:before{
-		content:attr(data-key);
+	@media (min-width: 480px){
+		&:before{
+			content:attr(data-key);
+		}
 	}
 }
 .ui-btn{

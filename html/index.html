@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>截图猜圣地</title>
+	<title>截图猜动画</title>
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -24,7 +24,7 @@
 								<b>{{game.leftScound}}</b>
 								妙
 							</div>
-							<h3>截图猜圣地</h3>
+							<h3>截图猜动画</h3>
 							<div class="num-box score-box">
 								<b>{{game.score}}</b>
 								分
@@ -44,7 +44,11 @@
 							<div class="round" 
 								v-for="round,index in game.allRounds" 
 								:data-right="String(round.isRight)"
-								:style="{top: `calc( var(--round-height) * ${game.allRounds.length - index - 1} )`}"
+								:key="round.name"
+								:style="{
+									top: `calc( var(--round-height) * ${game.allRounds.length - index - 1} )`,
+									opacity: 1 - (game.allRounds.length - index - 1) / 5
+								}"
 								>{{round.name}} <b>{{round.score > 0 ? '+' : ''}}{{round.score}}</b></div>
 						</div>
 					</div>
@@ -63,8 +67,8 @@
 		</div>
 		<div class="status-box" v-else>
 			<div class="df">
-				<h1>截图猜圣地</h1>
-				<p>根据动画截图猜作品名</p>
+				<h1>截图猜动画</h1>
+				<p>根据截图猜动画作品名</p>
 				<button @click="startGame()" class="ui-btn">开始游戏</button>
 				<footer>
 					<p>

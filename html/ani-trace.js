@@ -1,5 +1,5 @@
 const randNamesLength = 4;
-const defaultScound = 160;
+const defaultScound = 60;
 
 const getUnix = () => +new Date();
 
@@ -128,7 +128,7 @@ class Game {
 		nowRound.used = used;
 
 		if(value === nowRound.answer){ // 答对
-			nowRound.score = 10;
+			nowRound.score = Math.max(10 - Math.floor(used / 3000),5);
 			nowRound.plusScound = 1;
 			console.log('答对');
 		}
